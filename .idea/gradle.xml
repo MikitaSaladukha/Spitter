@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="11" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/async" />
+            <option value="$PROJECT_DIR$/jms" />
+            <option value="$PROJECT_DIR$/jms-rpc" />
+            <option value="$PROJECT_DIR$/lingo-rpc" />
+            <option value="$PROJECT_DIR$/remoting-clients" />
+            <option value="$PROJECT_DIR$/remoting-hessian" />
+            <option value="$PROJECT_DIR$/remoting-httpinvoker" />
+            <option value="$PROJECT_DIR$/remoting-jaxrpc" />
+            <option value="$PROJECT_DIR$/remoting-jaxws" />
+            <option value="$PROJECT_DIR$/remoting-jaxws-standalone" />
+            <option value="$PROJECT_DIR$/remoting-rmi" />
+            <option value="$PROJECT_DIR$/spitter-domain-jpa" />
+            <option value="$PROJECT_DIR$/spitter-domain-plain" />
+            <option value="$PROJECT_DIR$/spitter-email" />
+            <option value="$PROJECT_DIR$/spitter-jmx" />
+            <option value="$PROJECT_DIR$/spitter-persistence-common" />
+            <option value="$PROJECT_DIR$/spitter-persistence-hibernate-contextual-sessions" />
+            <option value="$PROJECT_DIR$/spitter-persistence-hibernate-template" />
+            <option value="$PROJECT_DIR$/spitter-persistence-jdbc-conventional" />
+            <option value="$PROJECT_DIR$/spitter-persistence-jdbc-dao-support" />
+            <option value="$PROJECT_DIR$/spitter-persistence-jdbc-template" />
+            <option value="$PROJECT_DIR$/spitter-persistence-jpa" />
+            <option value="$PROJECT_DIR$/spitter-service-annotation-tx" />
+            <option value="$PROJECT_DIR$/spitter-service-common" />
+            <option value="$PROJECT_DIR$/spitter-service-declarative-tx" />
+            <option value="$PROJECT_DIR$/spitter-service-programmatic-tx" />
+            <option value="$PROJECT_DIR$/spitter-web" />
+          </set>
+        </option>
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
