@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <bean id="spitterService" 
+      class="org.springframework.remoting.jaxrpc.JaxRpcPortProxyFactoryBean" >
+    <property name="wsdlDocumentUrl" value="http://localhost:8080/services/SpitterService?wsdl"/>
+    <property name="serviceName" value="spitterService"/>
+    <property name="portName" value="spitterServiceHttpPort"/>
+    <property name="serviceInterface" value="com.habuma.spitter.service.SpitterService"/>
+    <property name="namespaceUri" value="http://spitter.com"/>
+  </bean>
+
+</beans>
