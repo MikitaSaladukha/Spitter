@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
@@ -26,8 +26,8 @@ public class SimpleJdbcTemplateSpitterDao implements
           + " where id=?";
 
   //<start id="java_addSpitter_vars" /> 
-  private SimpleJdbcTemplate jdbcTemplate;
-  public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
+  private JdbcTemplate jdbcTemplate;
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
   }
   //<end id="java_addSpitter_vars" />
@@ -36,7 +36,7 @@ public class SimpleJdbcTemplateSpitterDao implements
   public Spitter getSpitterById(long id) {
     return jdbcTemplate.queryForObject(//<co id="co_query"/>
             SQL_SELECT_SPITTER_BY_ID,
-        new ParameterizedRowMapper<Spitter>() {
+        new RowMapper<Spitter>() {
           public Spitter mapRow(ResultSet rs, int rowNum) 
               throws SQLException {
             Spitter spitter = new Spitter();//<co id="co_map"/>

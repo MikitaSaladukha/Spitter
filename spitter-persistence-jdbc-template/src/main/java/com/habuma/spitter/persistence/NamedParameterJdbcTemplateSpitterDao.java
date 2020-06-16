@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
@@ -31,8 +31,8 @@ public class NamedParameterJdbcTemplateSpitterDao implements SpitterDao {
       SQL_SELECT_SPITTER + " where id=?";
 
   //<start id="java_addSpitter_vars" /> 
-  private SimpleJdbcTemplate jdbcTemplate;
-  public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
+  private JdbcTemplate jdbcTemplate;
+  public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
   }
   //<end id="java_addSpitter_vars" />
@@ -42,8 +42,8 @@ public class NamedParameterJdbcTemplateSpitterDao implements SpitterDao {
     Map<String, Object> args = new HashMap<String, Object>();
     args.put("id", id);
     
-    jdbcTemplate.queryForObject(SQL_SELECT_SPITTER_BY_ID, 
-            new ParameterizedRowMapper<Spitter>() {
+    jdbcTemplate.queryForObject(SQL_SELECT_SPITTER_BY_ID,
+            new RowMapper<Spitter>() {
               public Spitter mapRow(ResultSet rs,
                       int rowNum) throws SQLException {
                 // TODO Auto-generated method stub
@@ -53,7 +53,7 @@ public class NamedParameterJdbcTemplateSpitterDao implements SpitterDao {
     
     return jdbcTemplate.queryForObject(
             SQL_SELECT_SPITTER_BY_ID,
-        new ParameterizedRowMapper<Spitter>() {
+        new RowMapper<Spitter>() {
           public Spitter mapRow(ResultSet rs, int rowNum) 
               throws SQLException {
             Spitter spitter = new Spitter();

@@ -6,13 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-public class JdbcSpitterDao extends SimpleJdbcDaoSupport implements
+public class JdbcSpitterDao extends JdbcDaoSupport implements
     SpitterDao {
 
   private static final String SQL_INSERT_SPITTER = 
@@ -39,9 +40,9 @@ private static final String SQL_SELECT_RECENT_SPITTLE =
   SQL_SELECT_SPITTLE + " where postedTime > ? order by postedTime desc";
   
   public Spitter getSpitterById(long id) {
-    return getSimpleJdbcTemplate().queryForObject(
+    return getJdbcTemplate().queryForObject(
             SQL_SELECT_SPITTER_BY_ID,
-        new ParameterizedRowMapper<Spitter>() {
+        new RowMapper<Spitter>() {
           public Spitter mapRow(ResultSet rs, int rowNum) 
               throws SQLException {
             Spitter spitter = new Spitter();
@@ -55,7 +56,7 @@ private static final String SQL_SELECT_RECENT_SPITTLE =
   }
 
   public void addSpitter(Spitter spitter) {
-    getSimpleJdbcTemplate().update(
+    getJdbcTemplate().update(
         SQL_INSERT_SPITTER,
         new Object[] { spitter.getUsername(), spitter.getPassword(),
             spitter.getFullName() });
@@ -63,14 +64,14 @@ private static final String SQL_SELECT_RECENT_SPITTLE =
   }
 
   public void saveSpitter(Spitter spitter) {
-    getSimpleJdbcTemplate().update(
+    getJdbcTemplate().update(
         SQL_UPDATE_SPITTER,
         new Object[] { spitter.getUsername(), spitter.getPassword(),
             spitter.getFullName(), spitter.getId() });
   }
   
   public void saveSpittle(Spittle spittle) {    
-    getSimpleJdbcTemplate().update(SQL_INSERT_SPITTLE, new Object[] {
+    getJdbcTemplate().update(SQL_INSERT_SPITTLE, new Object[] {
         spittle.getSpitter().getId(),
         spittle.getText(),
         new Date()
@@ -80,8 +81,8 @@ private static final String SQL_SELECT_RECENT_SPITTLE =
   public List<Spittle> getRecentSpittle() {
     DateTime dt = new DateTime().minusDays(1);
     
-    return getSimpleJdbcTemplate().query(SQL_SELECT_RECENT_SPITTLE, 
-          new ParameterizedRowMapper<Spittle>() {
+    return getJdbcTemplate().query(SQL_SELECT_RECENT_SPITTLE,
+          new RowMapper<Spittle>() {
       public Spittle mapRow(ResultSet rs, int rowNum) throws SQLException {
         Spittle spittle = new Spittle();
         

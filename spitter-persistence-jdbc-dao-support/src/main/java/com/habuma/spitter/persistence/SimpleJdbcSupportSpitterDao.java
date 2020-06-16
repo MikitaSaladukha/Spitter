@@ -4,14 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 public class SimpleJdbcSupportSpitterDao 
-    extends SimpleJdbcDaoSupport implements SpitterDao {
+    extends JdbcDaoSupport implements SpitterDao {
 
   private static final String SQL_INSERT_SPITTER = "insert into spitter (username, password, fullname, email, update_by_email) values (?, ?, ?, ?, ?)";
 
@@ -26,9 +26,9 @@ public class SimpleJdbcSupportSpitterDao
 
   //<start id="java_getSpitterById" /> 
   public Spitter getSpitterById(long id) {
-    return getSimpleJdbcTemplate().queryForObject(
+    return getJdbcTemplate().queryForObject(
             SQL_SELECT_SPITTER_BY_ID,
-        new ParameterizedRowMapper<Spitter>() {
+        new RowMapper<Spitter>() {
           public Spitter mapRow(ResultSet rs, int rowNum) 
               throws SQLException {
             Spitter spitter = new Spitter();
@@ -45,7 +45,7 @@ public class SimpleJdbcSupportSpitterDao
 
   //<start id="java_addSpitter" /> 
   public void addSpitter(Spitter spitter) {
-    getSimpleJdbcTemplate().update(SQL_INSERT_SPITTER,
+    getJdbcTemplate().update(SQL_INSERT_SPITTER,
             spitter.getUsername(), 
             spitter.getPassword(),
             spitter.getFullName(),
@@ -56,7 +56,7 @@ public class SimpleJdbcSupportSpitterDao
   //<end id="java_addSpitter" />
 
   public void saveSpitter(Spitter spitter) {
-    getSimpleJdbcTemplate().update(SQL_UPDATE_SPITTER,
+    getJdbcTemplate().update(SQL_UPDATE_SPITTER,
             spitter.getUsername(), 
             spitter.getPassword(),
             spitter.getFullName(), 
@@ -67,7 +67,7 @@ public class SimpleJdbcSupportSpitterDao
 
   //<start id="java_queryForIdentity" /> 
   private long queryForIdentity() {
-    return getSimpleJdbcTemplate().queryForLong("call identity()");
+    return getJdbcTemplate().queryForLong("call identity()");
   }
   //<end id="java_queryForIdentity" />
   
